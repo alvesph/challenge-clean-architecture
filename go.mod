@@ -3,7 +3,10 @@ module github.com/alvesph/challenge-clean-architecture
 go 1.23.6
 
 require (
+	github.com/go-chi/chi v1.5.5
+	github.com/go-chi/chi/v5 v5.2.1
 	github.com/spf13/viper v1.20.1
+	gorm.io/driver/sqlite v1.6.0
 	gorm.io/gorm v1.30.0
 )
 
@@ -12,6 +15,7 @@ require (
 	github.com/go-viper/mapstructure/v2 v2.2.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
+	github.com/mattn/go-sqlite3 v1.14.22 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.3 // indirect
 	github.com/sagikazarmark/locafero v0.7.0 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect

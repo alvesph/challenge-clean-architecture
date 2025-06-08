@@ -15,9 +15,9 @@ Este repositório contém a implementação da listagem de pedidos (orders) via 
 - [X] Configurar dependências (Go modules, etc.)
 - [X] Criar camada de model e repository de Order
 - [X] Criar service de listagem de orders
-- [ ] Criar handler REST com endpoint `GET /order`
-- [ ] Criar arquivo `api.http` com exemplo de requisição REST
-- [ ] Testar retorno da listagem via REST
+- [X] Criar handler REST com endpoint `GET /order`
+- [X] Criar arquivo `api.http` com exemplo de requisição REST
+- [X] Testar retorno da listagem via REST
 
 ---
 

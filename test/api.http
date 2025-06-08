@@ -1,0 +1,14 @@
+POST http://localhost:8080/orders
+Content-Type: application/json
+
+{
+  "customer_id": "123",
+  "product_id": "456",
+  "quantity": 2,
+  "total_price": 99.90,
+  "status": "pending"
+}
+
+###
+
+GET http://localhost:8080/orders HTTP/1.1
