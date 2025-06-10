@@ -1,0 +1,24 @@
+syntax = "proto3";
+package pb;
+option go_package = "github.com/alvesph/challenge-clean-architecture/internal/pb";
+
+message Order {
+  uint64 id = 1;
+  string customer_id = 2;
+  string product_id = 3;
+  string quantity = 4;
+  double total_price = 5;
+  string status = 6;
+  string created_at = 7;
+  string updated_at = 8;
+}
+
+message ListOrdersRequest {}
+
+message ListOrdersResponse {
+  repeated Order orders = 1;
+}
+
+service OrderService {
+  rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse);
+}

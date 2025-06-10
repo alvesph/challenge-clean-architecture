@@ -23,8 +23,8 @@ Este repositório contém a implementação da listagem de pedidos (orders) via 
 
 ## ✅ Etapa 2: Serviço gRPC (ListOrders)
 
-- [ ] Criar definição do serviço gRPC (proto file)
-- [ ] Gerar os arquivos gRPC (protobuf + Go)
+- [X] Criar definição do serviço gRPC (proto file)
+- [X] Gerar os arquivos gRPC (protobuf + Go)
 - [ ] Implementar o serviço `ListOrders` no servidor gRPC
 - [ ] Conectar o service gRPC com a camada de service/repository
 - [ ] Expor o serviço na porta definida
