@@ -29,12 +29,14 @@ Este repositório contém a implementação da listagem de pedidos (orders) via 
 - [X] Conectar o service gRPC com a camada de service/repository
 - [X] Expor o serviço na porta definida
 - [X] Adicionar testes ou client para validação local
+  - Evans: https://github.com/ktr0731/evans
 
 ---
 
 ## ✅ Etapa 3: Query GraphQL (ListOrders)
 
-- [ ] Configurar o servidor GraphQL
+- [X] Configurar o servidor GraphQL
+  - Doc: https://gqlgen.com/
 - [ ] Criar schema com a query `listOrders`
 - [ ] Mapear resolver para a query usando a camada de service
 - [ ] Expor endpoint GraphQL
