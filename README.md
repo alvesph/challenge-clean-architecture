@@ -37,7 +37,8 @@ Este repositório contém a implementação da listagem de pedidos (orders) via 
 
 - [X] Configurar o servidor GraphQL
   - Doc: https://gqlgen.com/
-- [ ] Criar schema com a query `listOrders`
+- [X] Criar schema com a query `listOrders`
+  - `go run github.com/99designs/gqlgen generate`
 - [ ] Mapear resolver para a query usando a camada de service
 - [ ] Expor endpoint GraphQL
 - [ ] Testar listagem com playground ou cliente GraphQL

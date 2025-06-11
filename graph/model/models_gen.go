@@ -2,25 +2,16 @@
 
 package model
 
-type Mutation struct {
-}
-
-type NewTodo struct {
-	Text   string `json:"text"`
-	UserID string `json:"userId"`
+type Order struct {
+	ID         string   `json:"id"`
+	CustomerID *string  `json:"customer_id,omitempty"`
+	ProductID  *string  `json:"product_id,omitempty"`
+	Quantity   *string  `json:"quantity,omitempty"`
+	TotalPrice *float64 `json:"total_price,omitempty"`
+	Status     *string  `json:"status,omitempty"`
+	CreatedAt  *string  `json:"created_at,omitempty"`
+	UpdatedAt  *string  `json:"updated_at,omitempty"`
 }
 
 type Query struct {
-}
-
-type Todo struct {
-	ID   string `json:"id"`
-	Text string `json:"text"`
-	Done bool   `json:"done"`
-	User *User  `json:"user"`
-}
-
-type User struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
 }
