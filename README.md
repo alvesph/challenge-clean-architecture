@@ -25,10 +25,10 @@ Este repositório contém a implementação da listagem de pedidos (orders) via 
 
 - [X] Criar definição do serviço gRPC (proto file)
 - [X] Gerar os arquivos gRPC (protobuf + Go)
-- [ ] Implementar o serviço `ListOrders` no servidor gRPC
-- [ ] Conectar o service gRPC com a camada de service/repository
-- [ ] Expor o serviço na porta definida
-- [ ] Adicionar testes ou client para validação local
+- [X] Implementar o serviço `ListOrders` no servidor gRPC
+- [X] Conectar o service gRPC com a camada de service/repository
+- [X] Expor o serviço na porta definida
+- [X] Adicionar testes ou client para validação local
 
 ---
 

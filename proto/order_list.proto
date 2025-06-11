@@ -1,9 +1,9 @@
 syntax = "proto3";
 package pb;
-option go_package = "github.com/alvesph/challenge-clean-architecture/internal/pb";
+option go_package = "internal/pb";
 
 message Order {
-  uint64 id = 1;
+  string id = 1;
   string customer_id = 2;
   string product_id = 3;
   string quantity = 4;
