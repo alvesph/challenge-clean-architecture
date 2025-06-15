@@ -3,26 +3,46 @@ package main
 import (
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/handler/extension"
 	"github.com/99designs/gqlgen/graphql/handler/lru"
 	"github.com/99designs/gqlgen/graphql/handler/transport"
 	"github.com/99designs/gqlgen/graphql/playground"
+	"github.com/alvesph/challenge-clean-architecture/configs"
 	"github.com/alvesph/challenge-clean-architecture/graph"
+	"github.com/alvesph/challenge-clean-architecture/graph/generated"
+	"github.com/alvesph/challenge-clean-architecture/internal/entity"
+	"github.com/alvesph/challenge-clean-architecture/internal/repository"
+	"github.com/alvesph/challenge-clean-architecture/internal/service"
 	"github.com/vektah/gqlparser/v2/ast"
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
 )
 
-const defaultPort = "8080"
-
 func main() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = defaultPort
+	cfg, err := configs.LoadConfig(".")
+	if err != nil {
+		panic("Failed to load configuration: " + err.Error())
 	}
 
-	srv := handler.New(graph.NewExecutableSchema(graph.Config{Resolvers: &graph.Resolver{}}))
+	db, err := gorm.Open(sqlite.Open("orders.db"), &gorm.Config{})
+	if err != nil {
+		panic("Failed to connect to database: " + err.Error())
+	}
+
+	db.AutoMigrate(&entity.Order{})
+
+	orderRepo := repository.NewOrder(db)
+	orderService := service.NewOrderService(orderRepo)
+
+	resolver := &graph.Resolver{
+		OrderService: orderService,
+	}
+
+	srv := handler.New(generated.NewExecutableSchema(generated.Config{
+		Resolvers: resolver,
+	}))
 
 	srv.AddTransport(transport.Options{})
 	srv.AddTransport(transport.GET{})
@@ -38,6 +58,6 @@ func main() {
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
 	http.Handle("/query", srv)
 
-	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+	log.Printf("connect to http://localhost:%s/ for GraphQL playground", cfg.GraphqlPort)
+	log.Fatal(http.ListenAndServe(":"+cfg.GraphqlPort, nil))
 }
