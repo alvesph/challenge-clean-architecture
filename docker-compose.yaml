@@ -1,9 +1,31 @@
 services:
-  sqlite:
-    image: nouchka/sqlite3:latest
-    container_name: sqlite
-    stdin_open: true
-    tty: true
+  rest:
+    build: .
+    command: ["./rest"]
+    environment:
+      - REST_PORT=8080
+    ports:
+      - "8080:8080"
     volumes:
-      - ./data:/root/db
-    entrypoint: [ "sh", "-c", "sqlite3 /root/db/cotacao.db '.databases'" ]
+      - ./data:/app/data
+
+  grpc:
+    build: .
+    command: ["./grpc"]
+    environment:
+      - GRPC_PORT=50051
+    ports:
+      - "50051:50051"
+    volumes:
+      - ./data:/app/data
+      - ./proto:/proto
+
+  graphql:
+    build: .
+    command: ["./graphql"]
+    environment:
+      - GRAPHQL_PORT=8081
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./data:/app/data

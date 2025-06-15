@@ -26,7 +26,7 @@ func main() {
 		panic("Failed to load configuration: " + err.Error())
 	}
 
-	db, err := gorm.Open(sqlite.Open("orders.db"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open("data/orders.db"), &gorm.Config{})
 	if err != nil {
 		panic("Failed to connect to database: " + err.Error())
 	}

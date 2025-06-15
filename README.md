@@ -47,12 +47,12 @@ Este repositório contém a implementação da listagem de pedidos (orders) via 
 
 ## ✅ Etapa 4: Banco de Dados e Docker
 
-- [ ] Criar Dockerfile da aplicação
-- [ ] Criar `docker-compose.yaml` com:
+- [X] Criar Dockerfile da aplicação
+- [X] Criar `docker-compose.yaml` com:
   - Serviço da aplicação
   - Banco de dados (sqlite)
-- [ ] Criar scripts de migração para a tabela `orders`
-- [ ] Garantir que `docker compose up`:
+- [X] Criar scripts de migração para a tabela `orders`
+- [X] Garantir que `docker compose up`:
   - Sobe aplicação
   - Cria e migra o banco de dados
 - [ ] Documentar variáveis de ambiente e configuração do DB
