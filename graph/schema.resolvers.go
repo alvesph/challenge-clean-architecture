@@ -7,16 +7,39 @@ package graph
 import (
 	"context"
 	"fmt"
+	"strconv"
 
+	"github.com/alvesph/challenge-clean-architecture/graph/generated"
 	"github.com/alvesph/challenge-clean-architecture/graph/model"
 )
 
 // Orders is the resolver for the orders field.
 func (r *queryResolver) Orders(ctx context.Context) ([]*model.Order, error) {
-	panic(fmt.Errorf("not implemented: Orders - orders"))
+	orders, err := r.OrderService.FindAll()
+	if err != nil {
+		return nil, fmt.Errorf("failed to fetch orders: %w", err)
+	}
+	var result []*model.Order
+	for _, o := range orders {
+		quantity := strconv.Itoa(o.Quantity)
+		id := strconv.FormatUint(uint64(o.ID), 10)
+		createdAt := o.CreatedAt.Format("2006-01-02 15:04:05")
+		updatedAt := o.UpdatedAt.Format("2006-01-02 15:04:05")
+		result = append(result, &model.Order{
+			ID:         id,
+			CustomerID: &o.CustomerID,
+			ProductID:  &o.ProductID,
+			Quantity:   &quantity,
+			TotalPrice: &o.TotalPrice,
+			Status:     &o.Status,
+			CreatedAt:  &createdAt,
+			UpdatedAt:  &updatedAt,
+		})
+	}
+	return result, nil
 }
 
 // Query returns QueryResolver implementation.
-func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
+func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
 type queryResolver struct{ *Resolver }

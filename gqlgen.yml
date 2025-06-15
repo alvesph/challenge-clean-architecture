@@ -4,28 +4,9 @@ schema:
 
 # Where should the generated server code go?
 exec:
-  package: graph
-  layout: single-file # Only other option is "follow-schema," ie multi-file.
+  filename: graph/generated/generated.go
+  package: generated
 
-  # Only for single-file layout:
-  filename: graph/generated.go
-
-  # Only for follow-schema layout:
-  # dir: graph
-  # filename_template: "{name}.generated.go"
-
-  # Optional: Maximum number of goroutines in concurrency to use per child resolvers(default: unlimited)
-  # worker_limit: 1000
-
-# Uncomment to enable federation
-# federation:
-#   filename: graph/federation.go
-#   package: graph
-#   version: 2
-#   options:
-#     computed_requires: true
-
-# Where should any generated models go?
 model:
   filename: graph/model/models_gen.go
   package: model
@@ -37,11 +18,6 @@ model:
 resolver:
   package: graph
   layout: follow-schema # Only other option is "single-file."
-
-  # Only for single-file layout:
-  # filename: graph/resolver.go
-
-  # Only for follow-schema layout:
   dir: graph
   filename_template: "{name}.resolvers.go"
 
