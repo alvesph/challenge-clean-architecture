@@ -7,6 +7,77 @@ Implementar listagem de orders utilizando REST, gRPC e GraphQL. Banco de dados d
 
 Este repositório contém a implementação da listagem de pedidos (orders) via REST, gRPC e GraphQL, utilizando Docker para orquestração dos serviços.
 
+
+# EXECUÇÃO DO APP
+
+## STEPS
+
+1. Rode o `compose`
+~~~shell
+docker compose up --build
+~~~
+
+2. Testando o serviço `rest`
+
+- POST
+~~~shell
+curl -X POST http://localhost:8080/orders \
+  -H "Content-Type: application/json" \
+  -d '{
+    "customer_id": "123",
+    "product_id": "456",
+    "quantity": 2,
+    "total_price": 99.90,
+    "status": "pending"
+  }'
+~~~
+
+- GET
+~~~shell
+curl -X GET http://localhost:8080/orders
+~~~
+
+3. Testando o `gRPC`
+
+- Rode o comando do evans
+~~~shell
+docker compose exec grpc evans -r repl --host 0.0.0.0 --port 50051 --proto /proto/order_list.proto
+~~~
+
+- No envans rode os seguintes comandos
+~~~shell
+package pb
+service OrderService
+call ListOrders
+~~~
+
+4. Testando o `graphQl`
+
+- Acesse a url `http://localhost:8081/`
+- Siga exemplo de `query`
+~~~shell
+query queryOrders{
+  orders{
+    quantity,
+    status,
+    created_at,
+    id,
+    customer_id,
+    product_id
+  }
+}
+~~~
+
+## Variáveis 
+
+- Já definido no `.env`
+~~~
+REST_PORT=8080
+GRPC_PORT=50051
+GRAPHQL_PORT=8081
+~~~
+
+# Checklist
 ---
 
 ## ✅ Etapa 1: API REST (GET /order)
@@ -55,22 +126,15 @@ Este repositório contém a implementação da listagem de pedidos (orders) via 
 - [X] Garantir que `docker compose up`:
   - Sobe aplicação
   - Cria e migra o banco de dados
-- [ ] Documentar variáveis de ambiente e configuração do DB
+- [X] Documentar variáveis de ambiente e configuração do DB
 
 ---
 
 ## ✅ Etapa 5: Documentação
 
-- [ ] Criar `README.md` com:
+- [X] Criar `README.md` com:
   - Instruções de build e execução
   - Portas de cada serviço (REST, gRPC, GraphQL)
   - Exemplo de requisições (ou apontar para `api.http`)
-- [ ] Atualizar checklist conforme for completando cada etapa
-
----
-
-## Observações
-- REST: Porta 8080
-- gRPC: Porta 50051
-- GraphQL: Porta 8081 (ou ajustar conforme necessário)
+- [X] Atualizar checklist conforme for completando cada etapa
 
